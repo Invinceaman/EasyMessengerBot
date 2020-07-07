@@ -1,0 +1,13 @@
+{
+	"commands":{
+		"!uptime":{
+			"help":"!uptime [no args]\nReturns the uptime of the bot from the time it was deployed to the chat.",
+			"file_path":"uptime_module"
+		},
+		"!commands":{
+			"help":"!commands [no args]\nLists all available commands.",
+			"file_path":"listfuncs_module"
+		}
+	},
+	"valid_groups":[2428443850534739]
+}
