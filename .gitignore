@@ -1,0 +1,4 @@
+auth_details.py
+session.json
+__pycache__/
+*_module.py
