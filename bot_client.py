@@ -19,6 +19,25 @@ import threading
 import utils
 
 
+def serialize_message(message_object):
+
+	r = {
+		'text':message_object.text,
+		'reply_to_id':message_object.reply_to_id,
+		'forwarded':message_object.forwarded,
+		'attachments':message_object.attachments,
+		'quick_replies':message_object.quick_replies,
+	}
+
+	if(message_object.replied_to == None):
+		r['replied_to'] = None
+		return r
+	else:
+		r['replied_to'] = serialize_message(message_object.replied_to)
+		return r
+
+
+
 class ChatBot(Client):
 	#def on_message(self, author_id, message_object, thread_id, thread_type, **kwargs):
 	def onMessage(self, author_id, message_object, thread_id, thread_type, **kwargs):
@@ -27,9 +46,9 @@ class ChatBot(Client):
 			utils.rand_delay(1, 1.5)
 			self.markAsRead(thread_id)
 
-			print(message_object)
+			print(serialize_message(message_object))
 
-			if author_id != self.uid and message_object.text[0] == "!":
+			if message_object.text != None and author_id != self.uid and message_object.text[0] == "!":
 				utils.rand_delay(1, 1.5)
 				self.setTypingStatus(status=TypingStatus.TYPING, thread_id=thread_id, thread_type=thread_type)
 
@@ -64,6 +83,9 @@ class ChatBot(Client):
 			self.valid_groups.add(int(group))
 			self.valid_groups.add(str(group))
 
+		print(self.valid_groups)
+		print(self.functions)
+
 		self.start_time = time.time()
 
 if __name__ == '__main__':
@@ -74,7 +96,7 @@ if __name__ == '__main__':
 	if(creds == None):
 		print("cannot find file containing login credentials.")
 	else:
-		print("cookies NOT available")
+		print("login credentials are available")
 		cookies = {}
 		cookies = utils.load_json(cookie_path)
 		username = creds['username']
