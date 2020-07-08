@@ -2,12 +2,12 @@
 	"commands":{
 		"!uptime":{
 			"help":"!uptime [no args]\nReturns the uptime of the bot from the time it was deployed to the chat.",
-			"file_path":"uptime_module"
+			"file_path":"uptime"
 		},
 		"!commands":{
 			"help":"!commands [no args]\nLists all available commands.",
-			"file_path":"listfuncs_module"
+			"file_path":"commands"
 		}
 	},
-	"valid_groups":[1111111111111111111111111111111111111111111111111]
+	"valid_groups":[{thread_id1}, {thread_id2}]
 }
